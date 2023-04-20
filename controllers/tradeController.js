@@ -21,11 +21,9 @@ exports.create = (req, res, next) => {
         trader: '',
         images: ['images/no-image-available.jpg'],
         description: '',
-        category: '',
         status: '',
     });
     trade.title = req.body.itemName;
-    trade.category = req.body.category;
     trade.description = req.body.description;
     trade.status = 'available';
     trade.trader = req.session.user;

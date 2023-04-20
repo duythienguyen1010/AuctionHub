@@ -32,13 +32,27 @@ exports.validateLogin = [
     }),
 ];
 
-exports.validateTrade = [
-    body('category', 'Category can not be empty').notEmpty().trim().escape(),
+let currentTime = new Date();
+let expirationDate = new Date();
+expirationDate.setMonth(expirationDate.getMonth() + 1);
+currentTime = currentTime.toString();
+expirationDate = expirationDate.toString();
+expirationDate = exports.validateTrade = [
+    body(
+        'expiration',
+        'expiration date can not be less than the current time or more than one month away'
+    )
+        .notEmpty()
+        .isAfter(currentTime)
+        .isBefore(expirationDate)
+        .trim()
+        .escape(),
     body('itemName', 'Item name can not be empty').notEmpty().trim().escape(),
     body('description', 'Description must be at least 10 characters long')
         .isLength({ min: 10 })
         .trim()
         .escape(),
+    body('initialPrice', 'Minimum starting price is $1').notEmpty().trim().escape(),
 ];
 
 exports.validateResult = (req, res, next) => {

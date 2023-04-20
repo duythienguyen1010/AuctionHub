@@ -1,10 +1,10 @@
 .trades {
-    width: 50%;
+    width: 100%;
     min-height: 400px;
     padding: 30px;
   }
   
-  .trades-header-console {
+  .trades-header {
     background-color: white;
     text-align: center;
     background-image: url(../images/consolebackground.jpg);
@@ -15,7 +15,7 @@
     border-color: aquamarine;
   }
   
-  .trades-header-console h1 {
+  .trades-header h1 {
     margin: 0;
     padding: 0;
     min-height: 50px;
@@ -24,43 +24,14 @@
     text-shadow: 3px 3px black;
   }
   
-  .trades-header-pc {
-    background-color: black;
-    color: black;
-    text-align: center;
-    background-image: url(../images/pcbackground.jpg);
-    background-position: center;
-    background-repeat: repeat;
-    background-size: 80%;
-    border-style: solid;
-    border-color: orangered;
-  }
-  
-  .trades-header-pc h1 {
-    margin: 0;
-    padding: 0;
-    min-height: 50px;
-    font-size: 70px;
-    color: orangered;
-    text-shadow: 3px 3px black;
-  }
-  
-  .trades-items-console {
+  .trades-items {
     background-color: whitesmoke;
     display: flex;
     flex-wrap: wrap;
     width: 100%;
   }
   
-  .trades-items-pc {
-    background-color: black;
-    color: white;
-    display: flex;
-    flex-wrap: wrap;
-    width: 100%;
-  }
-  
-  .trades-items {
+  .trades-items-individual {
     list-style: none;
     display: flex;
     flex-wrap: wrap;
@@ -68,9 +39,9 @@
     align-items: center;
   }
   
-  .trades-items li {
+  .trades-items-individual li {
     padding: 15px;
-    width: 40%;
+    width: 23%;
   }
   
   .item-img {
@@ -80,7 +51,7 @@
     object-fit: contain;
   }
   
-  .trades-items a {
+  .trades-items-individual a {
     text-decoration: none;
   }
   
