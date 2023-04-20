@@ -1,0 +1,112 @@
+<%- include('../partials/header.ejs')%> <%- include('../nav_bar/nav_bar.ejs')%>
+<div class="profile-body">
+    <div class="profile-head">
+        <img id="profile-img" src="../<%= user.profilePicture%>" alt="profile img" />
+        <div>
+            <h2>Welcome, <%=user.firstName%></h2>
+            <p>Here is your awesome profile page</p>
+        </div>
+    </div>
+    <div>
+        <h1>Pending Offers</h1>
+        <div class="trades-items-profile-wrapper">
+            <div class="offer-made">
+                <h2>Offers made by you</h2>
+                <%if (offerMade.length) {%>
+                <ul class="offer-item-profile">
+                    <%offerMade.forEach(offer => {%>
+                    <li>
+                        <img
+                            src="../<%= offer.item1.images[0] %>"
+                            class="item-img-profile"
+                            alt="ps5-sample" />
+                        <h3>
+                            <p>Item Wanted</p>
+                            <a href="/offers/<%= offer.id%>"><%=offer.item1.title%></a>
+                        </h3>
+                        <p>Satus: <%= offer.status%></p>
+                        <p>Sent to: <%=offer.recipient.firstName%> <%=offer.recipient.lastName%></p>
+                    </li>
+                    <%})%>
+                </ul>
+                <%} else {%>
+                <p>You have not made any offer yet</p>
+                <%}%>
+            </div>
+            <div class="offer-received">
+                <h2>Offers received</h2>
+                <%if (offerReceived.length) {%>
+                <ul class="offer-item-profile">
+                    <%offerReceived.forEach(offer => {%>
+                    <li>
+                        <img
+                            src="../<%= offer.item1.images[0] %>"
+                            class="item-img-profile"
+                            alt="ps5-sample" />
+                        <h3>
+                            <p>Item wanted</p>
+                            <a href="/offers/<%= offer.id%>"><%=offer.item2.title%></a>
+                        </h3>
+                        <p>Satus: <%= offer.status%></p>
+                        <p>From: <%=offer.creator.firstName%> <%=offer.creator.lastName%></p>
+                    </li>
+                    <%})%>
+                </ul>
+                <%} else {%>
+                <p>You have not received any offer yet</p>
+                <%}%>
+            </div>
+        </div>
+    </div>
+    <div>
+        <h1>Trades posted by you</h1>
+        <div class="trades-items-profile-wrapper">
+            <%if (trades.length) {%>
+            <ul class="trades-items-profile">
+                <%trades.forEach(trade =>{%>
+                <li>
+                    <img
+                        src="../<%= trade.images[0] %>"
+                        class="item-img-profile"
+                        alt="ps5-sample" />
+                    <h3><a href="/trades/<%= trade.id%>"><%= trade.title%></a></h3>
+                    <p>
+                        Last Update: <%= trade.updatedAt.toDateString()%>
+                        <br />
+                        Satus: <%= trade.status%>
+                    </p>
+                </li>
+                <%})%>
+            </ul>
+            <%} else {%>
+            <p>There is no trade to display at the moment</p>
+            <%}%>
+        </div>
+    </div>
+    <div>
+        <h1>Watch List</h1>
+        <div class="trades-items-profile-wrapper">
+            <%if (user.watchlist.length) {%>
+            <ul class="trades-items-profile">
+                <%user.watchlist.forEach(trade =>{%>
+                <li>
+                    <img
+                        src="../<%= trade.images[0] %>"
+                        class="item-img-profile"
+                        alt="ps5-sample" />
+                    <h3><a href="/trades/<%= trade.id%>"><%= trade.title%></a></h3>
+                    <p>
+                        Last Update: <%= trade.updatedAt.toDateString()%>
+                        <br />
+                        Satus: <%= trade.status%>
+                    </p>
+                </li>
+                <%})%>
+            </ul>
+            <%} else {%>
+            <p>There is no trade to display at the moment</p>
+            <%}%>
+        </div>
+    </div>
+</div>
+<%- include('../partials/footer.ejs')%>

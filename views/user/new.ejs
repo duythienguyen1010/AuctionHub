@@ -1,0 +1,31 @@
+<%- include('../partials/header.ejs')%>
+<%- include('../nav_bar/nav_bar.ejs')%>
+      <div class="form-wrapper">
+        <form action = '/users/new' method = 'POST'>
+          <h1>Creating new Account</h1>
+          <div>
+            <label for="firstName">First name</label>
+            <input type="text" id="firstName" name="firstName" required placeholder="John">
+          </div>
+          <div>
+            <label for="lastName">Last name</label>
+            <input type="text" id="lastName" name="lastName" required placeholder="Doe">
+          </div>
+          <div>
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone" pattern="(?:\(\d{3}\)|\d{3})[- ]?\d{3}[- ]?\d{4}" placeholder="(123) 456-7890" required>
+          </div>
+          <div>
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required placeholder="myEmail@example.com">
+          </div>
+          <div>
+            <label for="email">Password</label>
+            <input type="password" id="password" name="password" class = "fixed-width" minlength="8" required>
+          </div>
+          <div id="submit-btn">
+            <input type="submit" value="Create Account" >
+          </div>
+        </form>
+      </div>
+<%- include('../partials/footer.ejs')%>

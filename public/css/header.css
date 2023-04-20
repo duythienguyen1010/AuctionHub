@@ -1,0 +1,76 @@
+#logo {
+    width: 100%;
+    height: auto;
+    border-radius: 100%;
+    padding-right: 8px;
+    padding-left: 8px;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  
+  #logo-link {
+    width: 7%;
+  }
+  
+  #head-title {
+    padding-left: 20px;
+    display: block;
+    width: 30%;
+    height: 100%;
+  }
+  
+  #head-title p {
+    margin-top: 0;
+  }
+  
+  #head-title h1 {
+    margin-bottom: 0;
+  }
+  
+  #header-nav {
+    width: 61.9%;
+    align-self: stretch;
+    display: flex;
+    align-items: center;
+  }
+  
+  #header-nav ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    margin-left: auto;
+  }
+  
+  #header-nav ul li {
+    max-width: 170px;
+    width: 33%;
+    text-align: center;
+  }
+  
+  #header-nav ul li img {
+    width: 25%;
+    border-radius: 25%;
+  }
+  
+  #header-nav a {
+    color: white;
+    text-decoration: none;
+  }
+  
+  #header-nav ul li:hover {
+    background-color: gray;
+  }
+  
+  .gen-nav {
+    border-top: solid;
+    flex-basis: 100%;
+    padding: 1%;
+  }
+  
+  .gen-nav a {
+    padding: 2%;
+    color: white;
+    text-decoration: none;
+  }

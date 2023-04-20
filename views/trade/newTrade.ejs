@@ -1,0 +1,38 @@
+<%- include('../partials/header.ejs')%>
+<%- include('../nav_bar/nav_bar.ejs')%>
+      <div class="form-wrapper">
+        <form action = '/trades' method = 'POST'>
+          <h1>Trade information</h1>
+          <div>
+            <label for="category">Category</label>
+            <select id="category" name="category">
+              <option value="console">Console</option>
+              <option value="pc">PC</option>
+            </select>
+          </div>
+          <div>
+            <label for="itemName">Item name</label>
+            <input type="text" id="itemName" name="itemName" required>
+          </div>
+          <div>
+            <label for="description">Description</label>
+            <textarea
+              id="description"
+              name="description"
+              rows="5"
+              cols="25"
+              required
+              minlength="10"
+            ></textarea>
+          </div>
+          <div>
+            <label for="pictures">Upload images</label>
+            <input type="button" id="pictures" name="upload" value="upload" >
+          </div>
+          <div id="submit-btn">
+            <input type="submit" value="Create Trade" >
+            <input type="reset" >
+          </div>
+        </form>
+      </div>
+<%- include('../partials/footer.ejs')%>

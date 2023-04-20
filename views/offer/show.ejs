@@ -1,0 +1,86 @@
+<%- include('../partials/header.ejs')%> <%- include('../nav_bar/nav_bar.ejs')%>
+<div class="offer-wrapper">
+    <div class="offer-header">
+        <h1>Proposed Offer</h1>
+        <div class="offer-sub-header">
+            <h4>By: <%=offer.creator.firstName%> <%=offer.creator.lastName%></h4>
+            <h4>Status: <%=offer.status%></h4>
+        </div>
+    </div>
+    <div class="offer-details">
+        <div class="offer-item1">
+            <h2>Want to trade:</h2>
+            <div class="offer-img">
+                <img src="../<%= offer.item2.images[0] %>" alt="broken images" />
+            </div>
+            <h1><%= offer.item2.title%></h1>
+            <h3>
+                Listed by: <%= offer.item2.trader.firstName + ' ' + offer.item2.trader.lastName%>
+            </h3>
+            <div class="contact-links">
+                <img src="../images/call-icon.png" alt="phone icon" />
+                <a href=""><%= offer.item2.trader.contact.phone%></a>
+                <img src="../images/email-icon.png" alt="email icon" />
+                <a href=""><%= offer.item2.trader.contact.email%></a>
+            </div>
+            <h4>Description:</h4>
+            <p><%= offer.item2.description %></p>
+        </div>
+        <div class="offer-item2">
+            <h2>For:</h2>
+            <div class="offer-img">
+                <img src="../<%= offer.item1.images[0] %>" alt="broken images" />
+            </div>
+            <h1><%= offer.item1.title%></h1>
+            <h3>
+                Listed by: <%= offer.item1.trader.firstName + ' ' + offer.item1.trader.lastName%>
+            </h3>
+            <div class="contact-links">
+                <img src="../images/call-icon.png" alt="phone icon" />
+                <a href=""><%= offer.item1.trader.contact.phone%></a>
+                <img src="../images/email-icon.png" alt="email icon" />
+                <a href=""><%= offer.item1.trader.contact.email%></a>
+            </div>
+            <h4>Description:</h4>
+            <p><%= offer.item1.description %></p>
+        </div>
+    </div>
+    <%if (user.id == offer.creator.id && offer.status == 'pending') {%>
+    <form class="offer-action">
+        <button
+            class="button-format"
+            type="submit"
+            formmethod="GET"
+            formaction="/offers/update/<%= offer.id%>/">
+            Update Offer
+        </button>
+        <div></div>
+        <button
+            class="button-format"
+            type="submit"
+            formmethod="POST"
+            formaction="/offers/<%= offer.id%>?_method=DELETE">
+            Cancel Offer
+        </button>
+    </form>
+    <%} else if (user.id == offer.item1.trader.id && offer.status == 'pending') {%>
+    <form class="offer-action">
+        <button
+            class="button-format"
+            type="submit"
+            formmethod="POST"
+            formaction="/offers/accept/<%= offer.id%>?_method=PUT">
+            Accept Offer
+        </button>
+        <div></div>
+        <button
+            class="button-format"
+            type="submit"
+            formmethod="POST"
+            formaction="/offers/deny/<%= offer.id%>?_method=PUT">
+            Deny Offer
+        </button>
+    </form>
+    <%}%>
+</div>
+<%-include('../partials/footer.ejs')%>

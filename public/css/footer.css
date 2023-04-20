@@ -1,0 +1,17 @@
+#word-content-footer {
+    padding-left: 20px;
+    width: 40%;
+    margin-right: auto;
+  }
+  
+  #image-content-footer {
+    padding-right: 20px;
+    width: 50%;
+    align-self: stretch;
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  #image-content-footer img {
+    width: 10%;
+  }

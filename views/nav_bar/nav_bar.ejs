@@ -1,0 +1,52 @@
+<header>
+    <a href="/" id="logo-link">
+        <img id="logo" src="../../../images/logo.jpg" alt="logo" />
+    </a>
+    <div id="head-title">
+        <h1>Dragon's Den</h1>
+        <p>Gaming trades</p>
+    </div>
+    <div id="header-nav">
+        <ul>
+            <li>
+                <a href="/trades/new">
+                    <p>List Product</p>
+                    <img src="../../../images/listing-logo.png" alt="listing logo" />
+                </a>
+            </li>
+            <%if(!user) {%>
+            <li>
+                <a href="/users/login">
+                    <p>Login</p>
+                    <img src="../../../images/login-logo.png" alt="login logo" />
+                </a>
+            </li>
+            <li>
+                <a href="/users/new">
+                    <p>Create Account</p>
+                    <img src="../../../images/create-account-logo.png" alt="account logo" />
+                </a>
+            </li>
+            <%} else {%>
+            <li>
+                <a href="/users/profile">
+                    <p>Profile</p>
+                    <img src="../../../images/login-logo.png" alt="account logo" />
+                </a>
+            </li>
+            <li>
+                <a href="/users/logout">
+                    <p>Logout</p>
+                    <img src="../../../images/logout-logo.png" alt="account logo" />
+                </a>
+            </li>
+            <%}%>
+        </ul>
+    </div>
+    <div class="gen-nav">
+        <a href="/trades">Explore products ></a>
+    </div>
+    <%- include('../error_message/flash_error.ejs')%>
+</header>
+
+<main>

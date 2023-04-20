@@ -1,0 +1,70 @@
+.form-wrapper {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    background-image: url(../images/consolebackground.jpg);
+    background-position: center;
+    background-repeat: repeat;
+    background-size: 40%;
+  }
+  
+  .form-wrapper form {
+    background-color: white;
+    width: 45%;
+    padding: 20px;
+  }
+  
+  .form-wrapper form div {
+    width: 95%;
+    padding-left: 30px;
+  }
+  
+  .form-wrapper form h1 {
+    border-style: solid;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+  }
+  
+  .form-wrapper form label {
+    margin: 10px;
+    display: inline-block;
+    width: 30%;
+    text-align: right;
+  }
+  
+  .form-wrapper form input {
+    margin: 10px;
+  }
+  
+  .form-wrapper form textarea {
+    margin-left: 10px;
+  }
+  
+  .form-wrapper form select {
+    margin: 10px;
+    width: 30%;
+    background-color: whitesmoke;
+    border-radius: 4px;
+    height: 30px;
+  }
+  
+  .form-wrapper form input[type="submit"],
+  .form-wrapper form input[type="reset"] {
+    border-radius: 10px;
+    border: none;
+    background-color: black;
+    color: white;
+    width: 25%;
+    height: 30px;
+  }
+  
+  #submit-btn {
+    display: inline-block;
+    text-align: center;
+  }
+  
+  #submit-btn input:hover {
+    background-color: gray;
+  }

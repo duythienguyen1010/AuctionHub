@@ -1,0 +1,80 @@
+<%- include('../partials/header.ejs')%> <%- include('../nav_bar/nav_bar.ejs')%>
+<div class="product-images">
+    <div class="gallery">
+        <div class="gal-main-img">
+            <img src="../<%= trade.images[0] %>" alt="broken images" />
+        </div>
+        <div class="gal-sub-img">
+            <%for (let i = 1; i < trade.images.length; i++) {%>
+            <img src="../<%= trade.images[i]%>" alt="broken images" />
+            <%}%>
+        </div>
+    </div>
+</div>
+<div class="product-content">
+    <h1><%= trade.title%></h1>
+    <h3>Listed by: <%= trade.trader.firstName + ' ' + trade.trader.lastName%></h3>
+    <div class="contact-links">
+        <img src="../images/call-icon.png" alt="phone icon" />
+        <a href=""><%= trade.trader.contact.phone%></a>
+        <img src="../images/email-icon.png" alt="email icon" />
+        <a href=""><%= trade.trader.contact.email%></a>
+    </div>
+    <br />
+    <h4>Created date:</h4>
+    <p><%= trade.createdAt%></p>
+    <h4>Last Update:</h4>
+    <p><%= trade.updatedAt%></p>
+    <h4>Description:</h4>
+    <p><%= trade.description %></p>
+    <h4>Status: <%= trade.status%></h4>
+    <%if(user) {%> <%if(user == trade.trader._id) {%>
+    <form>
+        <%if(trade.status !== 'unavailable') {%>
+        <button
+            class="button-format"
+            type="submit"
+            formmethod="GET"
+            formaction="/trades/<%= trade.id%>/edit">
+            Update Trade
+        </button>
+        <%}%> <%if(trade.status !== 'offered') {%>
+        <button
+            class="button-format"
+            type="submit"
+            formmethod="POST"
+            formaction="/trades/<%= trade.id%>?_method=DELETE">
+            Delete Trade
+        </button>
+        <%}%>
+    </form>
+    <%} else {%>
+    <form>
+        <%if(!userDetails.watchlist.includes(trade.id)) {%>
+        <button
+            class="button-format"
+            type="submit"
+            formmethod="POST"
+            formaction="/offers/watch/<%= trade.id%>?_method=PUT">
+            Add to watchlist
+        </button>
+        <%} else {%>
+        <button
+            class="button-format"
+            type="submit"
+            formmethod="POST"
+            formaction="/offers/updateWatch/<%= trade.id%>?_method=PUT">
+            Remove from watchlist
+        </button>
+        <%}%>
+        <button
+            class="button-format"
+            type="submit"
+            formmethod="GET"
+            formaction="/offers/<%= trade.id%>/new">
+            Make an offer
+        </button>
+    </form>
+    <%}%> <%}%>
+</div>
+<%- include('../partials/footer.ejs')%>

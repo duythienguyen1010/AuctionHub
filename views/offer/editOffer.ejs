@@ -1,0 +1,34 @@
+<%- include('../partials/header.ejs')%> <%- include('../nav_bar/nav_bar.ejs')%>
+<div class="form-wrapper">
+    <form action="/offers/update/<%=offer.id%>?_method=PUT" method="POST">
+        <h1>Update offer</h1>
+        <div class="offered-item">
+            <h3><%= offer.item1.title%></h3>
+            <div class="gal-main-img">
+                <img src="/<%= offer.item1.images[0] %>" alt="broken images" />
+            </div>
+            <h4>Listed by: <%= offer.recipient.firstName + ' ' + offer.recipient.lastName%></h4>
+            <h5>Trade status: <%=offer.item1.status%></h5>
+            <h5>Description:</h5>
+            <p><%= offer.item1.description%></p>
+        </div>
+        <div>
+            <label for="item1">Item wanted</label>
+            <select ide="item1" name="item1">
+                <option value="<%=offer.item1.id%>"><%=offer.item1.title%></option>
+            </select>
+            <br />
+            <label for="item2">Item to trade</label>
+            <select id="item2" name="item2">
+                <%if (trades.length) { trades.forEach(trade =>{%>
+                <option value="<%=trade.id%>"><%=trade.title%></option>
+                <%}) } else {%>
+                <option value="none">No item found to trade</option>
+                <%}%>
+            </select>
+        </div>
+        <div id="submit-btn">
+            <input type="submit" value="Submit offer" />
+        </div>
+    </form>
+</div>
