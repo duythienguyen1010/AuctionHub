@@ -1,40 +1,28 @@
-const express = require("express");
-const controller = require("../controllers/tradeController");
-const { isLoggedIn, isTrader } = require("../middlewares/auth");
-const {
-    validateId,
-    validateTrade,
-    validateResult,
-    validateGreaterThan1,
-} = require("../middlewares/validator");
+const express = require('express');
+const controller = require('../controllers/tradeController');
+const { isLoggedIn, isTrader } = require('../middlewares/auth');
+const { validateId, validateTrade, validateResult } = require('../middlewares/validator');
 
 const router = express.Router();
 
 //GET /trades: send all trades to the user
-router.get("/", controller.index);
+router.get('/', controller.index);
 
 //GET /stories/new: send html form to create new trade
-router.get("/new", isLoggedIn, controller.new);
+router.get('/new', isLoggedIn, controller.new);
 
 //POST /trades: create a new trade
-router.post(
-    "/",
-    isLoggedIn,
-    validateTrade,
-    validateGreaterThan1,
-    validateResult,
-    controller.create
-);
+router.post('/', isLoggedIn, validateTrade, validateResult, controller.create);
 
 //GET /trades/:id: send detail of a trade identified by id
-router.get("/:id", validateId, controller.show);
+router.get('/:id', validateId, controller.show);
 
 //GET /trades/:id/edit: send html form for editing an existing trade
-router.get("/:id/edit", isLoggedIn, validateId, isTrader, controller.edit);
+router.get('/:id/edit', isLoggedIn, validateId, isTrader, controller.edit);
 
 //PUT /trades/:id: update the trade identified by id
 router.put(
-    "/:id",
+    '/:id',
     isLoggedIn,
     validateId,
     isTrader,
@@ -44,6 +32,6 @@ router.put(
 );
 
 //DELETE /trades/:id: delete trade identified by id
-router.delete("/:id", isLoggedIn, validateId, isTrader, controller.delete);
+router.delete('/:id', isLoggedIn, validateId, isTrader, controller.delete);
 
 module.exports = router;

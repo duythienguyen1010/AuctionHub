@@ -1,62 +1,73 @@
-const model = require("../models/trade");
-const User = require("../models/user");
-const Offer = require("../models/offer");
+const model = require('../models/trade');
+const User = require('../models/user');
+const Offer = require('../models/offer');
 
 exports.index = (req, res, next) => {
     model
         .find()
-        .populate("trader", "firstName lastName contact")
-        .then((trades) => res.render("trade/trades", { trades }))
+        .populate('trader', 'firstName lastName contact')
+        .then((trades) => res.render('trade/trades', { trades }))
         .catch((err) => next(err));
 };
 
 exports.new = (req, res) => {
-    res.render("trade/newTrade");
+    res.render('trade/newTrade');
 };
 
 exports.create = (req, res, next) => {
-    let trade = new model({
-        id: "",
-        title: "",
-        trader: "",
-        images: ["images/no-image-available.jpg"],
-        description: "",
-        status: "",
-        initialPrice: 0,
-        expiration: new Date(),
-    });
-    trade.title = req.body.itemName;
-    trade.description = req.body.description;
-    trade.status = "available";
-    trade.trader = req.session.user;
-    trade.initialPrice = req.body.initialPrice;
-    trade.expiration = req.body.expiration;
-    if (req.body.pictures) {
-        trade.images.push(req.body.pictures);
-    } else {
-        for (let i = 0; i < 3; i++) {
-            trade.images.push("images/no-image-available.jpg");
-        }
-    }
-
-    trade
-        .save()
-        .then((trade) => {
-            res.redirect("/trades");
-        })
-        .catch((err) => {
-            if (err.name === "ValidationError") {
-                err.status = 400;
-            }
-            next(err);
+    console.log(req.body.initialPrice);
+    if (req.body.initialPrice >= 1) {
+        let trade = new model({
+            id: '',
+            title: '',
+            trader: '',
+            images: ['images/no-image-available.jpg'],
+            bestBidder: '',
+            description: '',
+            status: '',
+            initialPrice: 0,
+            bestPrice: 0,
+            expiration: new Date(),
         });
+        trade.title = req.body.itemName;
+        trade.description = req.body.description;
+        trade.status = 'available';
+        trade.trader = req.session.user;
+        trade.bestBidder = req.session.user;
+        trade.initialPrice = req.body.initialPrice;
+        trade.bestPrice = req.body.initialPrice;
+        trade.expiration = req.body.expiration;
+        if (req.body.pictures) {
+            trade.images.push(req.body.pictures);
+        } else {
+            for (let i = 0; i < 3; i++) {
+                trade.images.push('images/no-image-available.jpg');
+            }
+        }
+
+        trade
+            .save()
+            .then((trade) => {
+                res.redirect('/trades');
+            })
+            .catch((err) => {
+                if (err.name === 'ValidationError') {
+                    err.status = 400;
+                }
+                next(err);
+            });
+    } else {
+        req.flash('error', 'Starting price must be at least $1');
+        res.redirect('/trades/new');
+    }
 };
 
 exports.show = (req, res, next) => {
     let id = req.params.id;
     model
         .findById(id)
-        .populate("trader", "firstName lastName contact")
+        .populate('trader', 'firstName lastName contact')
+        .populate('bestBidder', 'firstName lastName')
         .then((trade) => {
             if (trade) {
                 let currentUser = req.session.user;
@@ -76,19 +87,22 @@ exports.show = (req, res, next) => {
                     minute: minutes,
                     second: sec,
                 };
+                if (ms == 0) {
+                    time = 0;
+                }
                 if (currentUser) {
                     User.findById(currentUser).then((userDetails) => {
-                        return res.render("./trade/trade", {
+                        return res.render('./trade/trade', {
                             trade,
                             userDetails,
                             time,
                         });
                     });
                 } else {
-                    return res.render("./trade/trade", { trade, time });
+                    return res.render('./trade/trade', { trade, time });
                 }
             } else {
-                let err = new Error("Cannot find a trade with id " + id);
+                let err = new Error('Cannot find a trade with id ' + id);
                 err.status = 404;
                 next(err);
             }
@@ -102,9 +116,9 @@ exports.edit = (req, res, next) => {
         .findById(id)
         .then((trade) => {
             if (trade) {
-                return res.render("./trade/editTrade", { trade });
+                return res.render('./trade/editTrade', { trade });
             } else {
-                let err = new Error("Cannot find a trade with id " + id);
+                let err = new Error('Cannot find a trade with id ' + id);
                 err.status = 404;
                 next(err);
             }
@@ -122,15 +136,15 @@ exports.update = (req, res, next) => {
         })
         .then((trade) => {
             if (trade) {
-                res.redirect("/trades/" + id);
+                res.redirect('/trades/' + id);
             } else {
-                let err = new Error("Cannot find a trade with id " + id);
+                let err = new Error('Cannot find a trade with id ' + id);
                 err.status = 404;
                 next(err);
             }
         })
         .catch((err) => {
-            if (err.name === "ValidationError") {
+            if (err.name === 'ValidationError') {
                 err.status = 400;
             }
             next(err);
@@ -147,10 +161,10 @@ exports.delete = (req, res, next) => {
                     .then(() => {
                         model
                             .findByIdAndUpdate(offer.item2, {
-                                status: "available",
+                                status: 'available',
                             })
                             .catch((err) => next(err));
-                        console.log("offer: " + offer.id + " has been deleted");
+                        console.log('offer: ' + offer.id + ' has been deleted');
                     })
                     .catch((err) => next(err));
             });
@@ -159,10 +173,10 @@ exports.delete = (req, res, next) => {
                     .then(() => {
                         model
                             .findByIdAndUpdate(offer.item2, {
-                                status: "available",
+                                status: 'available',
                             })
                             .catch((err) => next(err));
-                        console.log("offer: " + offer.id + " has been deleted");
+                        console.log('offer: ' + offer.id + ' has been deleted');
                     })
                     .catch((err) => next(err));
             });
@@ -170,11 +184,9 @@ exports.delete = (req, res, next) => {
                 .findByIdAndDelete(id, { useFindAndModify: false })
                 .then((trade) => {
                     if (trade) {
-                        res.redirect("/trades");
+                        res.redirect('/trades');
                     } else {
-                        let err = new Error(
-                            "Cannot find a trade with id " + id
-                        );
+                        let err = new Error('Cannot find a trade with id ' + id);
                         err.status = 404;
                         next(err);
                     }

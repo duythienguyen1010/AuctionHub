@@ -20,7 +20,7 @@ exports.new = (req, res, next) => {
                                 trade,
                             });
                         } else {
-                            req.flash('error', 'this item is not available to trade at the moment');
+                            req.flash('error', 'this item is not available to bid at the moment');
                             res.redirect('/trades/' + itemId);
                         }
                     } else {
@@ -35,36 +35,22 @@ exports.new = (req, res, next) => {
 };
 
 exports.create = (req, res, next) => {
-    Trade.findById(req.body.item1)
+    Trade.findById(req.body.item)
         .populate('trader')
         .then((trade) => {
-            let tradeOffer = new Offer({
-                id: '',
-                creator: '',
-                recipient: '',
-                item1: '',
-                item2: '',
-                status: '',
-            });
-            tradeOffer.item1 = req.body.item1;
-            tradeOffer.item2 = req.body.item2;
-            tradeOffer.status = 'pending';
-            tradeOffer.creator = req.session.user;
-            tradeOffer.recipient = trade.trader.id;
-            tradeOffer
-                .save()
-                .then((offer) => {
-                    Trade.findByIdAndUpdate(offer.item2, { status: 'offered' }).catch((err) =>
-                        next(err)
-                    );
-                    res.redirect('/offers/' + offer.id);
-                })
-                .catch((err) => {
-                    if (err.name === 'ValidationError') {
-                        err.status = 400;
-                    }
-                    next(err);
-                });
+            console.log(req.body.item);
+            if (req.body.bidPrice > trade.bestPrice) {
+                Trade.findByIdAndUpdate(req.body.item, { bestPrice: req.body.bidPrice }).catch(
+                    (err) => next(err)
+                );
+                Trade.findByIdAndUpdate(req.body.item, { bestBidder: req.session.user }).catch(
+                    (err) => next(err)
+                );
+                res.redirect('/trades/' + req.body.item);
+            } else {
+                req.flash('error', 'Bid price must be higher than the current best offer');
+                res.redirect('/offers/' + req.body.item + '/new');
+            }
         })
         .catch((err) => next(err));
 };
