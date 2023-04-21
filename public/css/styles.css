@@ -33,7 +33,7 @@ footer {
 #under-dev-img,
 #selfie,
 #contact-us-img {
-  width: 90%;
+  width: 60%;
 }
 
 .success {
@@ -62,8 +62,38 @@ main {
 }
 
 .body-wrapper {
-  display: flex;
+  /*display: flex;*/
   align-items: center;
   padding: 30px;
   align-self: stretch;
+  float: left;
+}
+
+#about h2 {
+  display:flex;
+}
+
+#about p {
+  display: block;
+  margin-block-start: 5em;
+  margin-block-end: 5em;
+  margin-inline-start: 5px;
+  margin-inline-end: 0px;
+  margin-left: 15px;
+}
+
+.contact {
+  display: flex;
+  background-color: white;
+}
+
+.reverse {
+  display: flex;
+  flex-direction: row-reverse;
+  background-color: whitesmoke;
+}
+
+.center {
+  text-align: center;
+  margin-top: 15px;
 }
