@@ -74,12 +74,7 @@ main {
 }
 
 #about p {
-  display: block;
-  margin-block-start: 5em;
-  margin-block-end: 5em;
-  margin-inline-start: 5px;
-  margin-inline-end: 0px;
-  margin-left: 15px;
+  margin-left: 2em;
 }
 
 .contact {
@@ -95,5 +90,5 @@ main {
 
 .center {
   text-align: center;
-  margin-top: 15px;
+  margin-top: 18px;
 }
