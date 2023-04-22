@@ -33,7 +33,7 @@ footer {
 #under-dev-img,
 #selfie,
 #contact-us-img {
-  width: 90%;
+  width: 60%;
 }
 
 .success {
@@ -62,8 +62,28 @@ main {
 }
 
 .body-wrapper {
-  display: flex;
   align-items: center;
   padding: 30px;
   align-self: stretch;
+  float: left;
+}
+
+.contact {
+  display: flex;
+  background-color: white;
+}
+
+#description-margin {
+  margin-left: 15px;
+}
+
+.reverse {
+  display: flex;
+  flex-direction: row-reverse;
+  background-color: whitesmoke;
+}
+
+.center {
+  text-align: center;
+  margin-top: 18px;
 }
