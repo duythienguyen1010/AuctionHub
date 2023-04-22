@@ -1,76 +1,105 @@
 #logo {
-    width: 100%;
-    height: auto;
-    border-radius: 100%;
-    padding-right: 8px;
-    padding-left: 8px;
-    padding-top: 0;
-    padding-bottom: 0;
-  }
-  
-  #logo-link {
-    width: 7%;
-  }
-  
-  #head-title {
-    padding-left: 20px;
-    display: block;
-    width: 30%;
-    height: 100%;
-  }
-  
-  #head-title p {
-    margin-top: 0;
-  }
-  
-  #head-title h1 {
-    margin-bottom: 0;
-  }
-  
-  #header-nav {
-    width: 61.9%;
-    align-self: stretch;
-    display: flex;
-    align-items: center;
-  }
-  
-  #header-nav ul {
-    list-style: none;
-    display: flex;
-    align-items: center;
-    padding: 0;
-    margin: 0;
-    margin-left: auto;
-  }
-  
-  #header-nav ul li {
-    max-width: 170px;
-    width: 33%;
-    text-align: center;
-  }
-  
-  #header-nav ul li img {
-    width: 25%;
-    border-radius: 25%;
-  }
-  
-  #header-nav a {
-    color: white;
-    text-decoration: none;
-  }
-  
-  #header-nav ul li:hover {
-    background-color: gray;
-  }
-  
-  .gen-nav {
-    border-top: solid;
-    flex-basis: 100%;
-    padding: 1%;
-  }
-  
-  .gen-nav a {
-    padding: 2%;
-    color: white;
-    text-decoration: none;
-  }
+  padding-left: 10%;
+  padding-top: 0;
+  padding-bottom: 0;
+  margin: 0;
+  height:100px;
+  width:100px;
+}
+
+#logo-link {
+  width: 10%;
+  padding: 0;
+  margin: 0;
+  size:50%;
+}
+
+#head-title {
+  padding-left: 20px;
+  margin: auto;
+  width: 50%;
+  align-items: center;
+  height: 100%;
+}
+
+#head-title p {
+  font-family: 'Italianno';
+  font-style: normal;
+  text-align: center;
+  margin: 0;
+  padding-right: 10%;
+  width: 90%;
+}
+
+#head-title h1 {
+  font-family: 'Italianno';
+  font-style: normal;
+  text-align: center;
+  font-size: 50px;
+  margin: 0;
+  padding-right: 10%;
+  width: 90%;
+}
+
+#header-nav {
+  border-top: solid;
+  align-self: stretch;
+  align-items: center;
+  border-color:black;
+}
+
+#header-nav ul {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+  margin-left: auto;
+}
+
+#header-nav ul li {
+  width: 24.9%;
+  text-align: center;
+  align-self: stretch;
+  font-family: 'Italianno';
+  font-size: 25px;
+}
+
+#header-nav ul li img {
+  width: 25%;
+  border-radius: 25%;
+}
+
+#header-nav a {
+  color: black;
+  text-decoration: none;
+}
+
+#header-nav ul li:hover {
+  background-color: gray;
+}
+
+.gen-nav {
+  border-top: solid;
+  flex-basis: 100%;
+  padding: 1%;
+  border-color:black;
+}
+
+.gen-nav a {
+  padding: 2%;
+  color: white;
+  text-decoration: none;
+}
+
+#header-branding {
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+#nav-wrapper {
+  background-color: #ffff00;
+  top: 0;
+  width: 100%;
+}
