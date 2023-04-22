@@ -58,21 +58,6 @@ exports.isNotTrader = (req, res, next) => {
         .catch((err) => next(err));
 };
 
-//Check if user has any item listed
-exports.hasTrade = (req, res, next) => {
-    let id = req.session.user;
-    Trade.find({ trader: id })
-        .then((trades) => {
-            if (trades.length >= 1) {
-                return next();
-            } else {
-                req.flash('error', 'You need to list at least 1 item in order to make an offer');
-                return res.redirect('/trades/new');
-            }
-        })
-        .catch((err) => next(err));
-};
-
 //Check if user is a party in the offer
 exports.isParty = (req, res, next) => {
     let userId = req.session.user;

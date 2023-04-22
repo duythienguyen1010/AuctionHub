@@ -35,21 +35,20 @@ exports.new = (req, res, next) => {
 };
 
 exports.create = (req, res, next) => {
-    Trade.findById(req.body.item)
+    Trade.findById(req.params.id)
         .populate('trader')
         .then((trade) => {
-            console.log(req.body.item);
             if (req.body.bidPrice > trade.bestPrice) {
-                Trade.findByIdAndUpdate(req.body.item, { bestPrice: req.body.bidPrice }).catch(
+                Trade.findByIdAndUpdate(req.params.id, { bestPrice: req.body.bidPrice }).catch(
                     (err) => next(err)
                 );
-                Trade.findByIdAndUpdate(req.body.item, { bestBidder: req.session.user }).catch(
+                Trade.findByIdAndUpdate(req.params.id, { bestBidder: req.session.user }).catch(
                     (err) => next(err)
                 );
-                res.redirect('/trades/' + req.body.item);
+                res.redirect('/trades/' + req.params.id);
             } else {
                 req.flash('error', 'Bid price must be higher than the current best offer');
-                res.redirect('/offers/' + req.body.item + '/new');
+                res.redirect('/offers/' + req.params.id + '/new');
             }
         })
         .catch((err) => next(err));
