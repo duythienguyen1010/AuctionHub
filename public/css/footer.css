@@ -13,5 +13,6 @@
   }
   
   #image-content-footer img {
-    width: 10%;
+    max-width:85px;
+    width: 100%;
   }
