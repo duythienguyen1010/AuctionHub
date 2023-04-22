@@ -1,12 +1,21 @@
 const model = require('../models/trade');
 const User = require('../models/user');
 const Offer = require('../models/offer');
+const calculator = require('../middlewares/timeCalculation');
 
 exports.index = (req, res, next) => {
     model
         .find()
         .populate('trader', 'firstName lastName contact')
-        .then((trades) => res.render('trade/trades', { trades }))
+        .then((trades) => {
+            trades.forEach((trade) => {
+                let time = calculator.timeCalculation(trade);
+                if (time.ms <= 0) {
+                    model.findByIdAndUpdate(trade, { status: 'Closed' }).catch((err) => next(err));
+                }
+            });
+            res.render('trade/trades', { trades });
+        })
         .catch((err) => next(err));
 };
 
@@ -15,7 +24,6 @@ exports.new = (req, res) => {
 };
 
 exports.create = (req, res, next) => {
-    console.log(req.body.initialPrice);
     if (req.body.initialPrice >= 1) {
         let trade = new model({
             id: '',
@@ -71,24 +79,10 @@ exports.show = (req, res, next) => {
         .then((trade) => {
             if (trade) {
                 let currentUser = req.session.user;
-                let currentTime = new Date();
-                let ms = trade.expiration.getTime() - currentTime.getTime();
-                const days = Math.floor(ms / (24 * 60 * 60 * 1000));
-                const daysms = ms % (24 * 60 * 60 * 1000);
-                const hours = Math.floor(daysms / (60 * 60 * 1000));
-                const hoursms = ms % (60 * 60 * 1000);
-                const minutes = Math.floor(hoursms / (60 * 1000));
-                const minutesms = ms % (60 * 1000);
-                const sec = Math.floor(minutesms / 1000);
 
-                let time = {
-                    day: days,
-                    hour: hours,
-                    minute: minutes,
-                    second: sec,
-                };
-                if (ms == 0) {
-                    time = 0;
+                let time = calculator.timeCalculation(trade);
+                if (time.ms <= 0) {
+                    model.findByIdAndUpdate(id, { status: 'Closed' }).catch((err) => next(err));
                 }
                 if (currentUser) {
                     User.findById(currentUser).then((userDetails) => {
@@ -136,9 +130,18 @@ exports.update = (req, res, next) => {
         })
         .then((trade) => {
             if (trade) {
-                res.redirect('/trades/' + id);
+                let time = calculator.timeCalculation(trade);
+                if (time.ms > 0 && trade.status == 'available') {
+                    res.redirect('/trades/' + id);
+                } else {
+                    let err = new Error(
+                        'Cannot Update Listing that has ended, please relist. Trade id: ' + id
+                    );
+                    err.status = 404;
+                    next(err);
+                }
             } else {
-                let err = new Error('Cannot find a trade with id ' + id);
+                let err = new Error('Cannot find a listing with id ' + id);
                 err.status = 404;
                 next(err);
             }

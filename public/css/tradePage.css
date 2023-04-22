@@ -1,68 +1,82 @@
 .product-images {
-    width: 50%;
-    min-height: 400px;
-    padding: 30px;
-  }
-  
-  .product-content {
-    width: 50%;
-    min-height: 400px;
-    padding: 30px;
-  }
-  
-  .gallery {
-    display: flex;
-  }
-  
-  .gal-main-img {
-    width: 70%;
-  }
-  
-  .gal-main-img img {
-    width: 100%;
-    min-width: 300px;
-    max-width: 500px;
-    object-fit: contain;
-  }
-  
-  .gal-sub-img {
-    width: 29%;
-    padding: 10px;
-    padding-top: 0;
-  }
-  
-  .gal-sub-img img {
-    width: 100%;
-    min-width: 60px;
-    max-width: 120px;
-    object-fit: contain;
-  }
-  
-  .product-content h3,
-  .product-content p {
-    margin-top: 0;
-  }
-  
-  .product-content h1, 
-  .product-content h4 {
-    margin-bottom: 0;
-    margin-top: 0;
-  }
-  
-  .contact-links {
-    display: flex;
-    max-height: 30px;
-    align-items: center;
-  }
-  
-  .contact-links img {
-    width: 5%;
-    float: left;
-  }
-  
-  .contact-links a {
-    text-decoration: none;
-    float: right;
-    padding: 10px;
-  }
-  
+  width: 50%;
+  min-height: 400px;
+  padding: 30px;
+}
+
+.product-button-area {
+  text-align: center;
+}
+
+.product-price-area {
+  margin-top: 40px;
+  text-align: center;
+  background-color: #112D4E;
+  color: #F9F7F7;
+  border: solid;
+  border-color:#3F72AF;
+  border-radius: 60px;
+}
+
+.product-content {
+  width: 50%;
+  min-height: 400px;
+  padding: 30px;
+  background-color: whitesmoke;
+}
+
+.gallery {
+  display: flex;
+}
+
+.gal-main-img {
+  width: 70%;
+}
+
+.gal-main-img img {
+  width: 100%;
+  min-width: 300px;
+  max-width: 500px;
+  object-fit: contain;
+}
+
+.gal-sub-img {
+  width: 29%;
+  padding: 10px;
+  padding-top: 0;
+}
+
+.gal-sub-img img {
+  width: 100%;
+  min-width: 60px;
+  max-width: 120px;
+  object-fit: contain;
+}
+
+.product-content h3,
+.product-content p {
+  margin-top: 0;
+}
+
+.product-content h1, 
+.product-content h4 {
+  margin-bottom: 0;
+  margin-top: 0;
+}
+
+.contact-links {
+  display: flex;
+  max-height: 30px;
+  align-items: center;
+}
+
+.contact-links img {
+  width: 5%;
+  float: left;
+}
+
+.contact-links a {
+  text-decoration: none;
+  float: right;
+  padding: 10px;
+}

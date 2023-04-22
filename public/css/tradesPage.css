@@ -42,6 +42,7 @@
   .trades-items-individual li {
     padding: 15px;
     width: 23%;
+    background-color: white;
   }
   
   .item-img {

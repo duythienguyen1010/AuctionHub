@@ -23,43 +23,57 @@
     <br />
     <h4>Listed at:</h4>
     <p><%= trade.createdAt%></p>
-    <h4>Time Left</h4>
-    <p>Expiring on: <%= trade.expiration.toDateString()%></p>
-    <p>
-        <%= time.day%> Days: <%= time.hour%> Hours: <%= time.minute%> Minutes: <%= time.second%>
-        Seconds
-    </p>
-    <h4>Listing Price:</h4>
-    <p>$<%= trade.initialPrice %></p>
-    <h4>
-        Best bid: $<%= trade.bestPrice %> By <%= trade.bestBidder.firstName + ' ' +
-        trade.bestBidder.lastName %>
-    </h4>
+    <h4>Status: <%= trade.status%></h4>
+    <br />
     <h4>Description:</h4>
     <p><%= trade.description %></p>
-    <h4>Status: <%= trade.status%></h4>
+    <div class="product-button-area">
+        <h4>Expiration</h4>
+        <p><%= trade.expiration.toDateString()%></p>
+        <p>
+            <%= time.day%> Days: <%= time.hour%> Hours: <%= time.minute%> Minutes: <%= time.second%>
+            Seconds
+        </p>
+    </div>
+    <div class="product-price-area">
+        <%if (trade.status == 'available') {%>
+
+        <h4>Listing Price: $<%= trade.initialPrice %></h4>
+        <%if(!trade.bestBidder._id.equals(trade.trader._id)) {%>
+        <h1>
+            $<%= trade.bestPrice %> Bid from <%= trade.bestBidder.firstName + ' ' +
+            trade.bestBidder.lastName %>
+        </h1>
+        <%} else {%>
+        <h1>Item has not been bid</h1>
+        <%}%> <%}%> <%if (trade.status == 'Closed') {%>
+        <%if(trade.bestBidder._id.equals(trade.trader._id)) {%>
+        <h1>The auction for this item has closed with no winner</h1>
+        <%} else {%>
+        <h1>The winner is: <%= trade.bestBidder.firstName + ' ' + trade.bestBidder.lastName%>!</h1>
+        <%}}%>
+    </div>
     <%if(user) {%> <%if(user == trade.trader._id) {%>
-    <form>
-        <%if(trade.status !== 'unavailable') {%>
+    <form class="product-button-area">
+        <%if(trade.status !== 'Closed') {%>
         <button
             class="button-format"
             type="submit"
             formmethod="GET"
             formaction="/trades/<%= trade.id%>/edit">
-            Update Trade
+            Update Listing
         </button>
-        <%}%> <%if(trade.status !== 'offered') {%>
+        <%}%>
         <button
             class="button-format"
             type="submit"
             formmethod="POST"
             formaction="/trades/<%= trade.id%>?_method=DELETE">
-            Delete Trade
+            Delete listing
         </button>
-        <%}%>
     </form>
     <%} else {%>
-    <form>
+    <form class="product-button-area">
         <%if(!userDetails.watchlist.includes(trade.id)) {%>
         <button
             class="button-format"
@@ -76,14 +90,15 @@
             formaction="/offers/updateWatch/<%= trade.id%>?_method=PUT">
             Remove from watchlist
         </button>
-        <%}%>
+        <%}%> <%if(trade.status !== 'Closed') {%>
         <button
             class="button-format"
             type="submit"
             formmethod="GET"
             formaction="/offers/<%= trade.id%>/new">
-            Make an offer
+            Make your Bid
         </button>
+        <%}%>
     </form>
     <%}%> <%}%>
 </div>

@@ -1,7 +1,12 @@
 const express = require('express');
 const controller = require('../controllers/tradeController');
 const { isLoggedIn, isTrader } = require('../middlewares/auth');
-const { validateId, validateTrade, validateResult } = require('../middlewares/validator');
+const {
+    validateId,
+    validateTrade,
+    validateResult,
+    validateEditTrade,
+} = require('../middlewares/validator');
 
 const router = express.Router();
 
@@ -26,7 +31,7 @@ router.put(
     isLoggedIn,
     validateId,
     isTrader,
-    validateTrade,
+    validateEditTrade,
     validateResult,
     controller.update
 );

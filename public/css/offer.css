@@ -1,3 +1,59 @@
+.offer-form-wrapper {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    background-image: url(../images/consolebackground.jpg);
+    background-position: center;
+    background-repeat: repeat;
+    background-size: 40%;
+}
+  
+.offer-form-wrapper form input[type="submit"]{
+  border-radius: 10px;
+  border: none;
+  background-color: #112D4E;
+  color: white;
+  width: 100%;
+  height: 30px;
+}
+
+.offer-form-wrapper form {
+    background-color: white;
+    width: 30%;
+    padding: 20px;
+    text-align: center;
+}
+
+.offer-form-wrapper form h1 {
+    border-bottom: solid;
+}
+
+.offer-price-area {
+    background-color: #112D4E;
+    color: #F9F7F7;
+    border: solid;
+    border-color:#3F72AF;
+    border-radius: 60px;
+}
+
+.offer-price-area h4,
+.offer-price-area p {
+    margin: 0;
+}
+
+.bid-input{
+    padding:20px
+}
+
+.new-bid-img {
+  text-align: center;  
+}
+
+.new-bid-img img{
+    width: 40%;
+}
+
 .offer-wrapper {
     width: 100%;
     display: block;
