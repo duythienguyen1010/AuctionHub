@@ -15,39 +15,51 @@ exports.new = (req, res) => {
 };
 
 exports.create = (req, res, next) => {
-    let trade = new model({
-        id: '',
-        title: '',
-        trader: '',
-        images: ['images/no-image-available.jpg'],
-        description: '',
-        category: '',
-        status: '',
-    });
-    trade.title = req.body.itemName;
-    trade.category = req.body.category;
-    trade.description = req.body.description;
-    trade.status = 'available';
-    trade.trader = req.session.user;
-    if (req.body.pictures) {
-        trade.images.push(req.body.pictures);
-    } else {
-        for (let i = 0; i < 3; i++) {
-            trade.images.push('images/no-image-available.jpg');
-        }
-    }
-
-    trade
-        .save()
-        .then((trade) => {
-            res.redirect('/trades');
-        })
-        .catch((err) => {
-            if (err.name === 'ValidationError') {
-                err.status = 400;
-            }
-            next(err);
+    console.log(req.body.initialPrice);
+    if (req.body.initialPrice >= 1) {
+        let trade = new model({
+            id: '',
+            title: '',
+            trader: '',
+            images: ['images/no-image-available.jpg'],
+            bestBidder: '',
+            description: '',
+            status: '',
+            initialPrice: 0,
+            bestPrice: 0,
+            expiration: new Date(),
         });
+        trade.title = req.body.itemName;
+        trade.description = req.body.description;
+        trade.status = 'available';
+        trade.trader = req.session.user;
+        trade.bestBidder = req.session.user;
+        trade.initialPrice = req.body.initialPrice;
+        trade.bestPrice = req.body.initialPrice;
+        trade.expiration = req.body.expiration;
+        if (req.body.pictures) {
+            trade.images.push(req.body.pictures);
+        } else {
+            for (let i = 0; i < 3; i++) {
+                trade.images.push('images/no-image-available.jpg');
+            }
+        }
+
+        trade
+            .save()
+            .then((trade) => {
+                res.redirect('/trades');
+            })
+            .catch((err) => {
+                if (err.name === 'ValidationError') {
+                    err.status = 400;
+                }
+                next(err);
+            });
+    } else {
+        req.flash('error', 'Starting price must be at least $1');
+        res.redirect('/trades/new');
+    }
 };
 
 exports.show = (req, res, next) => {
@@ -55,15 +67,39 @@ exports.show = (req, res, next) => {
     model
         .findById(id)
         .populate('trader', 'firstName lastName contact')
+        .populate('bestBidder', 'firstName lastName')
         .then((trade) => {
             if (trade) {
                 let currentUser = req.session.user;
+                let currentTime = new Date();
+                let ms = trade.expiration.getTime() - currentTime.getTime();
+                const days = Math.floor(ms / (24 * 60 * 60 * 1000));
+                const daysms = ms % (24 * 60 * 60 * 1000);
+                const hours = Math.floor(daysms / (60 * 60 * 1000));
+                const hoursms = ms % (60 * 60 * 1000);
+                const minutes = Math.floor(hoursms / (60 * 1000));
+                const minutesms = ms % (60 * 1000);
+                const sec = Math.floor(minutesms / 1000);
+
+                let time = {
+                    day: days,
+                    hour: hours,
+                    minute: minutes,
+                    second: sec,
+                };
+                if (ms == 0) {
+                    time = 0;
+                }
                 if (currentUser) {
                     User.findById(currentUser).then((userDetails) => {
-                        return res.render('./trade/trade', { trade, userDetails });
+                        return res.render('./trade/trade', {
+                            trade,
+                            userDetails,
+                            time,
+                        });
                     });
                 } else {
-                    return res.render('./trade/trade', { trade });
+                    return res.render('./trade/trade', { trade, time });
                 }
             } else {
                 let err = new Error('Cannot find a trade with id ' + id);
@@ -94,7 +130,10 @@ exports.update = (req, res, next) => {
     let trade = req.body;
     let id = req.params.id;
     model
-        .findByIdAndUpdate(id, trade, { useFindAndModify: false, runValidators: true })
+        .findByIdAndUpdate(id, trade, {
+            useFindAndModify: false,
+            runValidators: true,
+        })
         .then((trade) => {
             if (trade) {
                 res.redirect('/trades/' + id);
@@ -121,7 +160,9 @@ exports.delete = (req, res, next) => {
                 Offer.findByIdAndDelete(offer.id)
                     .then(() => {
                         model
-                            .findByIdAndUpdate(offer.item2, { status: 'available' })
+                            .findByIdAndUpdate(offer.item2, {
+                                status: 'available',
+                            })
                             .catch((err) => next(err));
                         console.log('offer: ' + offer.id + ' has been deleted');
                     })
@@ -131,7 +172,9 @@ exports.delete = (req, res, next) => {
                 Offer.findByIdAndDelete(offer.id)
                     .then(() => {
                         model
-                            .findByIdAndUpdate(offer.item2, { status: 'available' })
+                            .findByIdAndUpdate(offer.item2, {
+                                status: 'available',
+                            })
                             .catch((err) => next(err));
                         console.log('offer: ' + offer.id + ' has been deleted');
                     })

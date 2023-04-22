@@ -1,10 +1,10 @@
 <%- include('../partials/header.ejs')%> <%- include('../nav_bar/nav_bar.ejs')%>
 <div class="trades">
-    <div class="trades-header-console"><h1>Console</h1></div>
-    <div class="trades-items-console">
+    <div class="trades-header"><h1>Live Bidding!</h1></div>
+    <div class="trades-items">
         <%if (trades.length) {%>
-        <ul class="trades-items">
-            <%trades.forEach(trade =>{ if(trade.category === 'console') {%>
+        <ul class="trades-items-individual">
+            <%trades.forEach(trade =>{%>
             <li>
                 <img src="<%= trade.images[0] %>" class="item-img" alt="ps5-sample" />
                 <h3><a href="/trades/<%= trade.id%>"><%= trade.title%></a></h3>
@@ -16,31 +16,7 @@
                     Status: <%= trade.status%>
                 </p>
             </li>
-            <%} })%>
-        </ul>
-        <%} else {%>
-        <p>There is no trade to display at the moment</p>
-        <%}%>
-    </div>
-</div>
-<div class="trades">
-    <div class="trades-header-pc"><h1>PC</h1></div>
-    <div class="trades-items-pc">
-        <%if (trades.length) {%>
-        <ul class="trades-items">
-            <%trades.forEach(trade =>{ if(trade.category === 'pc') {%>
-            <li>
-                <img src="<%= trade.images[0] %>" class="item-img" alt="pc-sample" />
-                <h3><a href="/trades/<%= trade.id%>"><%= trade.title%></a></h3>
-                <p>
-                    Listed by: <%= trade.trader.firstName + ' ' + trade.trader.lastName%>
-                    <br />
-                    Last updated: <%= trade.updatedAt.toDateString()%>
-                    <br />
-                    Status: <%= trade.status%>
-                </p>
-            </li>
-            <%} })%>
+            <% })%>
         </ul>
         <%} else {%>
         <p>There is no trade to display at the moment</p>

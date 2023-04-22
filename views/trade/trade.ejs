@@ -21,10 +21,20 @@
         <a href=""><%= trade.trader.contact.email%></a>
     </div>
     <br />
-    <h4>Created date:</h4>
+    <h4>Listed at:</h4>
     <p><%= trade.createdAt%></p>
-    <h4>Last Update:</h4>
-    <p><%= trade.updatedAt%></p>
+    <h4>Time Left</h4>
+    <p>Expiring on: <%= trade.expiration.toDateString()%></p>
+    <p>
+        <%= time.day%> Days: <%= time.hour%> Hours: <%= time.minute%> Minutes: <%= time.second%>
+        Seconds
+    </p>
+    <h4>Listing Price:</h4>
+    <p>$<%= trade.initialPrice %></p>
+    <h4>
+        Best bid: $<%= trade.bestPrice %> By <%= trade.bestBidder.firstName + ' ' +
+        trade.bestBidder.lastName %>
+    </h4>
     <h4>Description:</h4>
     <p><%= trade.description %></p>
     <h4>Status: <%= trade.status%></h4>
