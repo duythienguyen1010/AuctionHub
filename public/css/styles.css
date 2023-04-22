@@ -62,24 +62,19 @@ main {
 }
 
 .body-wrapper {
-  /*display: flex;*/
   align-items: center;
   padding: 30px;
   align-self: stretch;
   float: left;
 }
 
-#about h2 {
-  display:flex;
-}
-
-#about p {
-  margin-left: 2em;
-}
-
 .contact {
   display: flex;
   background-color: white;
+}
+
+#description-margin {
+  margin-left: 15px;
 }
 
 .reverse {
