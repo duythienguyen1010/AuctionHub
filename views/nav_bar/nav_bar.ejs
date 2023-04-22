@@ -5,30 +5,41 @@
                 <img id="logo" src="../../../images/logo.png" alt="logo" />
             </a>
             <div id="head-title">
-                <link href='https://fonts.googleapis.com/css?family=Italianno' rel='stylesheet'>
+                <link href="https://fonts.googleapis.com/css?family=Italianno" rel="stylesheet" />
                 <h1>Auction Hub</h1>
             </div>
         </div>
-        
+
         <div id="header-nav">
             <ul>
                 <li>
-                    <a href="/trades/new">
-                        <p>Listing</p>
+                    <a href="/trades">
+                        <p>Explore Item</p>
                     </a>
                 </li>
+                <li>
+                    <a href="/trades/new">
+                        <p>List Item</p>
+                    </a>
+                </li>
+                <%if(!user) {%>
                 <li>
                     <a href="/users/login">
                         <p>Log In</p>
                     </a>
                 </li>
-                <%if(!user) {%>
                 <li>
                     <a href="/users/new">
                         <p>Sign Up</p>
                     </a>
                 </li>
                 <%} else {%>
+                <li>
+                    <a href="/users/profile">
+                        <p>Profile</p>
+                    </a>
+                </li>
+
                 <li>
                     <a href="/users/logout">
                         <p>Logout</p>
@@ -37,11 +48,8 @@
                 <%}%>
             </ul>
         </div>
-        <div class="gen-nav">
-            <a href="/trades">Explore products ></a>
-        </div>
     </div>
-    
+
     <%- include('../error_message/flash_error.ejs')%>
 </header>
 

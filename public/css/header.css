@@ -3,15 +3,15 @@
   padding-top: 0;
   padding-bottom: 0;
   margin: 0;
-  height:100px;
-  width:100px;
+  height: 75px;
+  width: 75px;
 }
 
 #logo-link {
   width: 10%;
   padding: 0;
   margin: 0;
-  size:50%;
+  size: 50%;
 }
 
 #head-title {
@@ -45,7 +45,7 @@
   border-top: solid;
   align-self: stretch;
   align-items: center;
-  border-color:black;
+  border-color: #F9F7F7;
 }
 
 #header-nav ul {
@@ -62,7 +62,7 @@
   text-align: center;
   align-self: stretch;
   font-family: 'Italianno';
-  font-size: 25px;
+  font-size: 30px;
 }
 
 #header-nav ul li img {
@@ -70,26 +70,17 @@
   border-radius: 25%;
 }
 
+#header-nav ul li p {
+  margin: 0
+}
+
 #header-nav a {
-  color: black;
+  color: #F9F7F7;
   text-decoration: none;
 }
 
 #header-nav ul li:hover {
-  background-color: gray;
-}
-
-.gen-nav {
-  border-top: solid;
-  flex-basis: 100%;
-  padding: 1%;
-  border-color:black;
-}
-
-.gen-nav a {
-  padding: 2%;
-  color: white;
-  text-decoration: none;
+  background-color: #3F72AF;
 }
 
 #header-branding {
@@ -99,7 +90,7 @@
 }
 
 #nav-wrapper {
-  background-color: #ffff00;
+  background-color: #112D4E;
   top: 0;
   width: 100%;
 }
