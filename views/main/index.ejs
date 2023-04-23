@@ -1,22 +1,36 @@
 <%- include('../partials/header.ejs')%> <%- include('../nav_bar/nav_bar.ejs')%>
 <div class="body-wrapper">
-    <div>
-        <img
-            id="gaming-gear-img"
-            src="images/gaming-gear.jpg"
+  <div class="contact">
+    <div id="flex-homepage">
+      <img
+        id="gaming-gear-img"
+        src="images/main-auction.jpg"
             alt="image of gaming gears" />
-    </div>
-    <div>
-        <h2>Welcome to the den of the dragons!</h2>
-        <p>
-            This is a platform to trade old/new gaming gears in many diffrent
-            category
-        </p>
+    <!-- </div>
+    <div> -->
+        <h2>Welcome to Auction Hub!</h2>
+      <p>
+          This is a platform to auction any collectible you may have!
+      </p>
         <p>Please be resepectful, have fun, and good luck!</p>
-        <p>
-            <a class="button-format" href="/about">About us</a>
-            <a class="button-format" href="/contacts">Contacts</a>
-        </p>
+      <p id="home-button">
+        <a class="button-format" href="/about">About us</a>
+        <a class="button-format" href="/contacts">Contacts</a> 
+      </p>
     </div>
+    <div id="flex-homepage">
+        <h1>Auction Rules</h1>
+        <div class="contact"><p>We are excited to have you join our community of Buyers and Sellers! Our platform offers a diverse range of items,
+          from rare collectibles to everyday goods. 
+        </p></div>
+        <p>As a buyer, you'll have access to a wide variety of unique and hard-to-find items. To get started, click on 
+          the "Explore Item" tab and purchase your first item!
+        </p>
+        <p>As a seller, you'll have access to reach a larger audience and get the best value for your products. To get started,
+          click on the "List Item" tab to begin posting your first item!
+        </p>
+
+    </div>
+  </div>
 </div>
 <%- include('../partials/footer.ejs')%>
