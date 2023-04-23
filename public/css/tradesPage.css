@@ -7,12 +7,12 @@
   .trades-header {
     background-color: white;
     text-align: center;
-    background-image: url(../images/consolebackground.jpg);
+    background-image: url(../images/banner.jpg);
     background-position: center;
     background-repeat: repeat;
     background-size: 40%;
     border-style: solid;
-    border-color: aquamarine;
+    border-color: rgb(0, 255, 170);
   }
   
   .trades-header h1 {
@@ -40,9 +40,10 @@
   }
   
   .trades-items-individual li {
-    padding: 15px;
-    width: 23%;
-    background-color: white;
+    padding: 10px;
+    margin: 5px;
+    width: 43%;
+    background-color:white;
   }
   
   .item-img {
