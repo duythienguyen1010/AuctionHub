@@ -4,7 +4,7 @@
     <div class="trades-items">
         <%if (trades.length) {%>
         <ul class="trades-items-individual">
-            <%trades.forEach(trade =>{%>
+            <%trades.forEach(trade =>{%><%if (trade.status == 'available'){%>
             <li>
                 <img src="<%= trade.images[0] %>" class="item-img" alt="ps5-sample" />
                 <h3><a href="/trades/<%= trade.id%>"><%= trade.title%></a></h3>
@@ -16,7 +16,7 @@
                     Current Bid: $<%= trade.bestPrice%>
                 </p>
             </li>
-            <% })%>
+            <% }})%>
         </ul>
         <%} else {%>
         <p>There is no trade to display at the moment</p>
@@ -28,27 +28,23 @@
     <div class="trades-items">
         <%if (trades.length) {%>
         <ul class="trades-items-individual">
-            <%trades.forEach(trade =>{%>
-                <%if (trade.status == 'Closed'){%>
-                    <li>
-                        <img src="<%= trade.images[0] %>" class="item-img" alt="ps5-sample" />
-                        <h3><a href="/trades/<%= trade.id%>"><%= trade.title%></a></h3>
-                        <p>
-                            Listed by: <%= trade.trader.firstName + ' ' + trade.trader.lastName%>
-                            <br />
-                            Last updated: <%= trade.updatedAt.toDateString()%>
-                            <br />
-                            Status: <%= trade.status%>
-                        </p>
-                    </li>
-                <%} else {%>
-                    <p>There are no closed biddings at the moment</p>
-                    <%}%> 
-            <%})%>
+            <%trades.forEach(trade =>{%> <%if (trade.status == 'Closed'){%>
+            <li>
+                <img src="<%= trade.images[0] %>" class="item-img" alt="ps5-sample" />
+                <h3><a href="/trades/<%= trade.id%>"><%= trade.title%></a></h3>
+                <p>
+                    Listed by: <%= trade.trader.firstName + ' ' + trade.trader.lastName%>
+                    <br />
+                    Last updated: <%= trade.updatedAt.toDateString()%>
+                    <br />
+                    Status: <%= trade.status%>
+                </p>
+            </li>
+            <%}})%>
         </ul>
         <%}else {%>
-            <p>There are no closed biddings at the moment</p>
-            <%}%>
+        <p>There are no biddings at the moment</p>
+        <%}%>
     </div>
 </div>
 <%- include('../partials/footer.ejs')%>
