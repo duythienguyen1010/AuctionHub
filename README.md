@@ -12,3 +12,11 @@ To Ensure that the app run correctly, make sure you have the following:
  * Open up your browser and navigate to http://localhost:3000/
  
  Explore the app and Enjoy! Please report any bugs or suggestions. Thank you!
+
+# Auction Rule
+
+There are currently several rules regarding the functionalities of the application
+* The price you set upon listing the item can not be changed
+* The expiration of the trade can not be more than 1 month away from the listing time
+* You can only upload one image upon listing, addtional images can be uploaded individually using the update listing button
+* After an auction expired, the user with the highest bid will be the winner and obligated to contact the lister to purchase the item.
