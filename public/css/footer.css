@@ -13,7 +13,7 @@
   }
   
   #image-content-footer img {
-    /* width: 25%; */
+    width: 100%;
     align-self:right;
     color:white;
     text-decoration-color:white;
@@ -21,13 +21,6 @@
     margin-right: 5px;
   }
 
-  #image-color {
-    color:white;
-    text-decoration-color:white;
-    text-align:right;
-    /* width:20%; */
-  }
-
-  #footer-correction {
-    width:86px;
+  #image-content-footer a {
+    width: 86px;
   }

@@ -10,37 +10,34 @@
     <div>
         <h1>Current Biddings</h1>
         <div class="trades-items-profile-wrapper">
-            <div class="offer-received">
-                <h2>Offers received</h2>
-                <%if (offerReceived.length) {%>
-                <ul class="offer-item-profile">
-                    <%offerReceived.forEach(offer => {%>
-                    <li>
-                        <img
-                            src="../<%= offer.item1.images[0] %>"
-                            class="item-img-profile"
-                            alt="ps5-sample" />
-                        <h3>
-                            <p>Item wanted</p>
-                            <a href="/offers/<%= offer.id%>"><%=offer.item2.title%></a>
-                        </h3>
-                        <p>Satus: <%= offer.status%></p>
-                        <p>From: <%=offer.creator.firstName%> <%=offer.creator.lastName%></p>
-                    </li>
-                    <%})%>
-                </ul>
-                <%} else {%>
-                <p>You have not bid on an item yet</p>
-                <%}%>
-            </div>
+            <%if(tradesBid.length) {%>
+            <h2>You currently have the highest bid on the following items</h2>
+            <ul class="offer-item-profile">
+                <%tradesBid.forEach(trade => {%> <%if(!user.equals(trade.trader)) {%>
+                <li>
+                    <img src="../<%=trade.images[0]%>" class="item-img-profile" alt="ps5-sample" />
+                    <h3>
+                        <p>Item wanted</p>
+                        <a href="/trades/<%= trade.id%>"><%= trade.title%></a>
+                    </h3>
+                    <p>Status: <%= trade.status%></p>
+                    <p>Listed by: <%= trade.trader.firstName + ' ' + trade.trader.lastName%></p>
+                </li>
+
+                <%}})%>
+            </ul>
+            <%} else {%>
+            <h2>You have not bid on an item yet</h2>
+            <%}%>
         </div>
     </div>
     <div>
         <h1>Items Listed</h1>
         <div class="trades-items-profile-wrapper">
-            <%if (trades.length) {%>
+            <%if (tradesMade.length) {%>
+            <h2>You Have listed the following item</h2>
             <ul class="trades-items-profile">
-                <%trades.forEach(trade =>{%>
+                <%tradesMade.forEach(trade =>{%>
                 <li>
                     <img
                         src="../<%= trade.images[0] %>"
@@ -48,7 +45,7 @@
                         alt="ps5-sample" />
                     <h3><a href="/trades/<%= trade.id%>"><%= trade.title%></a></h3>
                     <p>
-                        Last Update: <%= trade.updatedAt.toDateString()%>
+                        Expiration: <%= trade.expiration.toDateString()%>
                         <br />
                         Status: <%= trade.status%>
                     </p>
@@ -56,7 +53,7 @@
                 <%})%>
             </ul>
             <%} else {%>
-            <p>There is no trade to display at the moment</p>
+            <h2>You have not listed any item</h2>
             <%}%>
         </div>
     </div>
@@ -64,6 +61,7 @@
         <h1>Watch List</h1>
         <div class="trades-items-profile-wrapper">
             <%if (user.watchlist.length) {%>
+            <h2>You currently These items on your watchlist</h2>
             <ul class="trades-items-profile">
                 <%user.watchlist.forEach(trade =>{%>
                 <li>
@@ -81,7 +79,7 @@
                 <%})%>
             </ul>
             <%} else {%>
-            <p>There is no trade to display at the moment</p>
+            <h2>You do not have any item on your watchlist</h2>
             <%}%>
         </div>
     </div>

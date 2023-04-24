@@ -78,22 +78,16 @@ exports.profile = (req, res, next) => {
     Promise.all([
         model.findById(id),
         Trade.find({ trader: id }),
-        Offer.find({ creator: id })
-            .populate('item1 item2')
-            .populate('recipient', 'firstName lastName'),
-        Offer.find({ recipient: id })
-            .populate('item1 item2')
-            .populate('creator', 'firstName lastName'),
-        ,
+        Trade.find({ bestBidder: id }).populate('trader', 'firstName lastName'),
     ])
         .then((result) => {
-            const [user, trades, offerMade, offerReceived] = result;
+            const [user, tradesMade, tradesBid] = result;
             model
                 .findById(user.id)
                 .populate({ path: 'watchlist' })
                 .exec(function (err, user) {
                     if (err) return next(err);
-                    res.render('./user/profile', { user, trades, offerMade, offerReceived });
+                    res.render('./user/profile', { user, tradesMade, tradesBid });
                 });
         })
         .catch((err) => next(err));
