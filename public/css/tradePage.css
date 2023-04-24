@@ -48,8 +48,8 @@
 
 .gal-sub-img img {
   width: 100%;
-  min-width: 60px;
-  max-width: 120px;
+  min-width: 120px;
+  max-width: 200px;
   object-fit: contain;
 }
 

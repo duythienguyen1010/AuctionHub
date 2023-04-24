@@ -159,6 +159,7 @@ exports.edit = (req, res, next) => {
 exports.update = (req, res, next) => {
     let trade = req.body;
     let id = req.params.id;
+    let files = req.files;
     model
         .findByIdAndUpdate(id, trade, {
             useFindAndModify: false,
@@ -168,7 +169,7 @@ exports.update = (req, res, next) => {
             if (trade) {
                 let time = calculator.timeCalculation(trade);
                 if (time.ms > 0 && trade.status == 'available') {
-                    if (req.files.length >= 1) {
+                    if (files.length >= 1) {
                         let imgArray = files.map((file) => {
                             let img = fs.readFileSync(file.path);
 

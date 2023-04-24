@@ -15,7 +15,10 @@
             <ul class="offer-item-profile">
                 <%tradesBid.forEach(trade => {%> <%if(!user.equals(trade.trader)) {%>
                 <li>
-                    <img src="../<%=trade.images[0]%>" class="item-img-profile" alt="ps5-sample" />
+                    <img
+                        src="data:<%= trade.images[0].contentType%>;base64,<%= trade.images[0].imageBase64%>"
+                        class="item-img-profile"
+                        alt="ps5-sample" />
                     <h3>
                         <p>Item wanted</p>
                         <a href="/trades/<%= trade.id%>"><%= trade.title%></a>
@@ -40,7 +43,7 @@
                 <%tradesMade.forEach(trade =>{%>
                 <li>
                     <img
-                        src="../<%= trade.images[0] %>"
+                        src="data:<%= trade.images[0].contentType%>;base64,<%= trade.images[0].imageBase64%>"
                         class="item-img-profile"
                         alt="ps5-sample" />
                     <h3><a href="/trades/<%= trade.id%>"><%= trade.title%></a></h3>
@@ -66,7 +69,7 @@
                 <%user.watchlist.forEach(trade =>{%>
                 <li>
                     <img
-                        src="../<%= trade.images[0] %>"
+                        src="data:<%= trade.images[0].contentType%>;base64,<%= trade.images[0].imageBase64%>"
                         class="item-img-profile"
                         alt="ps5-sample" />
                     <h3><a href="/trades/<%= trade.id%>"><%= trade.title%></a></h3>
