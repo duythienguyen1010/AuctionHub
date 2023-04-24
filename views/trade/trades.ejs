@@ -41,9 +41,9 @@
                 <p>
                     Listed by: <%= trade.trader.firstName + ' ' + trade.trader.lastName%>
                     <br />
-                    Last updated: <%= trade.updatedAt.toDateString()%>
-                    <br />
                     Status: <%= trade.status%>
+                    <br />
+                    Final Price: $<%= trade.bestPrice%>
                 </p>
             </li>
             <%}})%>
