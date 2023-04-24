@@ -2,11 +2,15 @@
 <div class="product-images">
     <div class="gallery">
         <div class="gal-main-img">
-            <img src="../<%= trade.images[0] %>" alt="broken images" />
+            <img
+                src="data:<%= trade.images[0].contentType%>;base64,<%= trade.images[0].imageBase64%>"
+                alt="broken images" />
         </div>
         <div class="gal-sub-img">
             <%for (let i = 1; i < trade.images.length; i++) {%>
-            <img src="../<%= trade.images[i]%>" alt="broken images" />
+            <img
+                src="data:<%= trade.images[i].contentType%>;base64,<%= trade.images[i].imageBase64%>"
+                alt="broken images" />
             <%}%>
         </div>
     </div>

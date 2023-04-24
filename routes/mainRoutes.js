@@ -12,7 +12,4 @@ router.get('/contacts', controller.contact);
 //GET /about: send user to the about us page
 router.get('/about', controller.about);
 
-//GET /dev: send user to the under developement page
-router.get("/dev", controller.dev);
-
 module.exports = router;

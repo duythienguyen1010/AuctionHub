@@ -1,6 +1,4 @@
 const Trade = require('../models/trade');
-const User = require('../models/user');
-const Offer = require('../models/offer');
 
 //Check if user is a guest
 exports.isGuest = (req, res, next) => {
@@ -53,57 +51,6 @@ exports.isNotTrader = (req, res, next) => {
                     err.status = 401;
                     return next(err);
                 }
-            }
-        })
-        .catch((err) => next(err));
-};
-
-//Check if user is a party in the offer
-exports.isParty = (req, res, next) => {
-    let userId = req.session.user;
-    let id = req.params.id;
-    Offer.findById(id)
-        .then((offer) => {
-            if (userId == offer.creator || userId == offer.recipient) {
-                return next();
-            } else {
-                let err = new Error('Unauthorized to access the resource');
-                err.status = 401;
-                return next(err);
-            }
-        })
-        .catch((err) => next(err));
-};
-
-//Check if user is the creator of the offer
-exports.isCreator = (req, res, next) => {
-    let userId = req.session.user;
-    let id = req.params.id;
-    Offer.findById(id)
-        .then((offer) => {
-            if (userId == offer.creator) {
-                return next();
-            } else {
-                let err = new Error('Unauthorized action');
-                err.status = 401;
-                return next(err);
-            }
-        })
-        .catch((err) => next(err));
-};
-
-//Check if user is the creator of the offer
-exports.isRecipient = (req, res, next) => {
-    let userId = req.session.user;
-    let id = req.params.id;
-    Offer.findById(id)
-        .then((offer) => {
-            if (userId == offer.recipient) {
-                return next();
-            } else {
-                let err = new Error('Unauthorized action');
-                err.status = 401;
-                return next(err);
             }
         })
         .catch((err) => next(err));

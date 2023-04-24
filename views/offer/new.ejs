@@ -5,7 +5,9 @@
         <div class="offered-item">
             <h3><%= trade.title%></h3>
             <div class="new-bid-img">
-                <img src="/<%= trade.images[0] %>" alt="broken images" />
+                <img
+                    src="data:<%= trade.images[0].contentType%>;base64,<%= trade.images[0].imageBase64%>"
+                    alt="broken images" />
             </div>
             <h4>Listed by: <%= trade.trader.firstName + ' ' + trade.trader.lastName%></h4>
             <h4>Status: <%=trade.status%></h4>
