@@ -9,6 +9,7 @@ exports.new = (req, res, next) => {
             const [user, trades] = result;
             Trade.findById(itemId)
                 .populate('trader', 'firstName lastName')
+                .populate('images', 'creator contentType imageBase64')
                 .then((trade) => {
                     if (trade) {
                         if (trade.status == 'available') {
@@ -35,7 +36,6 @@ exports.new = (req, res, next) => {
 exports.create = (req, res, next) => {
     Trade.findById(req.params.id)
         .populate('trader')
-        .populate('images', 'creator contentType imageBase64')
         .then((trade) => {
             if (req.body.bidPrice > trade.bestPrice) {
                 Trade.findByIdAndUpdate(req.params.id, { bestPrice: req.body.bidPrice }).catch(

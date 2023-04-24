@@ -83,6 +83,7 @@ exports.profile = (req, res, next) => {
     ])
         .then((result) => {
             const [user, tradesMade, tradesBid] = result;
+            console.log(user.watchlist);
             model
                 .findById(user.id)
                 .populate({ path: 'watchlist' })
