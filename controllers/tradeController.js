@@ -2,6 +2,21 @@ const model = require('../models/trade');
 const User = require('../models/user');
 const Offer = require('../models/offer');
 const calculator = require('../middlewares/timeCalculation');
+var fs = require('fs');
+var path = require('path');
+
+var multer = require('multer');
+ 
+var storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'uploads')
+    },
+    filename: (req, file, cb) => {
+        cb(null, file.fieldname + '-' + Date.now())
+    }
+});
+ 
+var upload = multer({ storage: storage });
 
 exports.index = (req, res, next) => {
     model
@@ -24,12 +39,14 @@ exports.new = (req, res) => {
 };
 
 exports.create = (req, res, next) => {
+    console.log(req.body)
     if (req.body.initialPrice >= 1) {
         let trade = new model({
             id: '',
             title: '',
             trader: '',
-            images: ['images/no-image-available.jpg'],
+            // images: ['images/no-image-available.jpg'],
+            img: {},
             bestBidder: '',
             description: '',
             status: '',
@@ -45,17 +62,22 @@ exports.create = (req, res, next) => {
         trade.initialPrice = req.body.initialPrice;
         trade.bestPrice = req.body.initialPrice;
         trade.expiration = req.body.expiration;
-        if (req.body.pictures) {
-            trade.images.push(req.body.pictures);
-        } else {
-            for (let i = 0; i < 3; i++) {
-                trade.images.push('images/no-image-available.jpg');
-            }
+        trade.img = {
+            data: fs.readFileSync(path.join(__dirname + '/uploads/' + req.file.filename)),
+            contentType: 'image/png'
         }
+        // if (req.body.pictures) {
+        //     trade.images.push(req.body.pictures);
+        // } else {
+        //     for (let i = 0; i < 3; i++) {
+        //         trade.images.push('images/no-image-available.jpg');
+        //     }
+        // }
 
         trade
             .save()
             .then((trade) => {
+                console.log(trade)
                 res.redirect('/trades');
             })
             .catch((err) => {

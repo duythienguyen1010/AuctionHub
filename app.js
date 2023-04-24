@@ -32,7 +32,6 @@ mongoose
         });
     })
     .catch((err) => console.log(err.message));
-
 //mount middleware
 app.use(
     session({

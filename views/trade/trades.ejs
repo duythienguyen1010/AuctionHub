@@ -6,7 +6,7 @@
         <ul class="trades-items-individual">
             <%trades.forEach(trade =>{%>
             <li>
-                <img src="<%= trade.images[0] %>" class="item-img" alt="ps5-sample" />
+                <!-- <img src="<%= trade.images[0] %>" class="item-img" alt="ps5-sample" /> -->
                 <h3><a href="/trades/<%= trade.id%>"><%= trade.title%></a></h3>
                 <p>
                     Listed by: <%= trade.trader.firstName + ' ' + trade.trader.lastName%>
