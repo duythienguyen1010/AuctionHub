@@ -7,6 +7,7 @@ const {
     validateResult,
     validateEditTrade,
 } = require('../middlewares/validator');
+const store = require('../middlewares/multer');
 
 const router = express.Router();
 
@@ -17,7 +18,14 @@ router.get('/', controller.index);
 router.get('/new', isLoggedIn, controller.new);
 
 //POST /trades: create a new trade
-router.post('/', isLoggedIn, validateTrade, validateResult, controller.create);
+router.post(
+    '/',
+    store.array('images', 4),
+    isLoggedIn,
+    validateTrade,
+    validateResult,
+    controller.create
+);
 
 //GET /trades/:id: send detail of a trade identified by id
 router.get('/:id', validateId, controller.show);
@@ -28,6 +36,7 @@ router.get('/:id/edit', isLoggedIn, validateId, isTrader, controller.edit);
 //PUT /trades/:id: update the trade identified by id
 router.put(
     '/:id',
+    store.array('images', 4),
     isLoggedIn,
     validateId,
     isTrader,

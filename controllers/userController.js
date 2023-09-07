@@ -1,6 +1,5 @@
 const model = require('../models/user');
 const Trade = require('../models/trade');
-const Offer = require('../models/offer');
 
 exports.new = (req, res) => {
     res.render('./user/new');
@@ -77,11 +76,14 @@ exports.profile = (req, res, next) => {
     let id = req.session.user;
     Promise.all([
         model.findById(id),
-        Trade.find({ trader: id }),
-        Trade.find({ bestBidder: id }).populate('trader', 'firstName lastName'),
+        Trade.find({ trader: id }).populate('images', 'creator contentType imageBase64'),
+        Trade.find({ bestBidder: id })
+            .populate('trader', 'firstName lastName')
+            .populate('images', 'creator contentType imageBase64'),
     ])
         .then((result) => {
             const [user, tradesMade, tradesBid] = result;
+            console.log(user.watchlist);
             model
                 .findById(user.id)
                 .populate({ path: 'watchlist' })

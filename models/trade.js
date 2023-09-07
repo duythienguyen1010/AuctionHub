@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const tradeSchema = new Schema(
     {
         title: { type: String, required: [true, 'title is required'] },
-        images: { type: Array, required: [true, 'image is required'] },
+        images: [{ type: Schema.Types.ObjectId, ref: 'Image' }],
         description: {
             type: String,
             required: [true, 'content is required'],
