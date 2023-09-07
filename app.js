@@ -20,10 +20,13 @@ app.set("view engine", "ejs");
 
 //connect to database
 mongoose
-    .connect("mongodb+srv://duythienguyen1010:<thieN1010>@cluster0.6oiuqql.mongodb.net/?retryWrites=true&w=majority", {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-    })
+    .connect(
+        "mongodb+srv://duythienguyen1010:thieN1010@cluster0.6oiuqql.mongodb.net/?retryWrites=true&w=majority",
+        {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+        }
+    )
     .then(() => {
         //start the server
         app.listen(PORT, () => {
