@@ -20,7 +20,7 @@ app.set("view engine", "ejs");
 
 //connect to database
 mongoose
-    .connect("mongodb://127.0.0.1:27017/expressProject", {
+    .connect("mongodb+srv://duythienguyen1010:<thieN1010>@cluster0.6oiuqql.mongodb.net/?retryWrites=true&w=majority", {
         useNewUrlParser: true,
         useUnifiedTopology: true,
     })

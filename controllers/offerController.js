@@ -126,5 +126,5 @@ exports.deny = (req, res, next) => {
                 next(err);
             }
         })
-        .catch();
+        .catch((err) => next(err));
 };
