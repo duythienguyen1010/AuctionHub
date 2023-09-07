@@ -16,12 +16,15 @@ const app = express();
 
 //configure app
 const PORT = process.env.PORT || 3030;
+const AUTHNAME = process.env.AUTHNAME || "";
+const AUTHPASS = process.env.AUTHPASS || "";
+const SECRET = process.env.SECRET || "";
 app.set("view engine", "ejs");
 
 //connect to database
 mongoose
     .connect(
-        "mongodb+srv://duythienguyen1010:thieN1010@cluster0.6oiuqql.mongodb.net/?retryWrites=true&w=majority",
+        `mongodb+srv://${AUTHNAME}:${AUTHPASS}@cluster0.6oiuqql.mongodb.net/?retryWrites=true&w=majority`,
         {
             useNewUrlParser: true,
             useUnifiedTopology: true,
@@ -38,12 +41,11 @@ mongoose
 //mount middleware
 app.use(
     session({
-        secret: "ajfeirf90aeu9eroejfoefj",
+        secret: SECRET,
         resave: false,
         saveUninitialized: false,
         store: new MongoStore({
-            mongoUrl:
-                "mongodb+srv://duythienguyen1010:thieN1010@cluster0.6oiuqql.mongodb.net/?retryWrites=true&w=majority",
+            mongoUrl: `mongodb+srv://${AUTHNAME}:${AUTHPASS}@cluster0.6oiuqql.mongodb.net/?retryWrites=true&w=majority`,
         }),
         cookie: { maxAge: 60 * 60 * 1000 },
     })
